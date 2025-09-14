@@ -1,0 +1,835 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.main-header h1 {
+  font-size: 2rem;
+  margin-bottom: 5px;
+  letter-spacing: 1px;
+}
+
+.main-header h4 {
+  font-weight: normal;
+  font-size: 1rem;
+  opacity: 0.9;
+}
+.navbar {
+  background: #222;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-list li {
+  margin-right: 5%;
+}
+
+.nav-list a {
+  display: block;
+  padding: 12px 20px;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.nav-list a:hover {
+  background: #444;
+  transform: translateY(-2px);
+}
+
+.nav-list a.active {
+  background: #2a502d; /* green highlight for active tab */
+  border-bottom: 3px solid #5ecf67;
+}
+
+/* Container for CS modules */
+#cs-mod-grid {
+  display: flex;
+  flex-wrap: wrap;              /* enables wrapping */
+  justify-content: center;      /* centers the modules */
+  gap: 20px;                    /* spacing between cards */
+  margin: 30px auto;
+}
+
+/* Progress Bar */
+.progress-text {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+progress {
+  width: 100%;
+  height: 20px;
+  appearance: none;
+}
+
+progress::-webkit-progress-bar {
+  background: #eee;
+  border-radius: 10px;
+}
+
+progress::-webkit-progress-value {
+  background: linear-gradient(90deg, #3ca35b, #66cc88);
+  border-radius: 10px;
+  transition: width 0.5s ease-in-out;
+}
+
+/* Grid */
+.main-mod-grid {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+.column {
+  width: 30%;
+  padding: 15px;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.column:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
+
+.column h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 6px;
+}
+
+/* Easy Column */
+.easy {
+  background: #eaf8ea;
+  border: 2px solid #3ca35b;
+}
+
+.easy h2 {
+  background: #3ca35b;
+  color: white;
+}
+
+.easy .cs-mod {
+  background: #b9e4b9;
+  display: block;
+  margin: 8px 0;
+  padding: 12px;
+  text-align: center;
+  border-radius: 8px;
+  text-decoration: none;
+  color: black;
+  transition: all 0.3s ease;
+}
+
+.easy .cs-mod:hover {
+  background: #97d497;
+  transform: scale(1.05);
+}
+
+/* Medium Column */
+.medium {
+  background: #fff8e1;
+  border: 2px solid #e6b800;
+}
+
+.medium h2 {
+  background: #e6b800;
+  color: black;
+}
+
+.medium .cs-mod {
+  background: #ffe680;
+  display: block;
+  margin: 8px 0;
+  padding: 12px;
+  text-align: center;
+  border-radius: 8px;
+  text-decoration: none;
+  color: black;
+  transition: all 0.3s ease;
+}
+
+.medium .cs-mod:hover {
+  background: #ffd633;
+  transform: scale(1.05);
+}
+
+/* Hard Column */
+.hard {
+  background: #ffe5e5;
+  border: 2px solid #d11a2a;
+}
+
+.hard h2 {
+  background: #d11a2a;
+  color: white;
+}
+
+.hard .cs-mod {
+  background: #ff9999;
+  display: block;
+  margin: 8px 0;
+  padding: 12px;
+  text-align: center;
+  border-radius: 8px;
+  text-decoration: none;
+  color: black;
+  transition: all 0.3s ease;
+}
+
+.hard .cs-mod:hover {
+  background: #ff6666;
+  transform: scale(1.05);
+}
+
+/* Note Section */
+.note-section {
+  background: #fff3cd;
+  border: 2px solid #ffeeba;
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+.note-section:hover {
+  transform: scale(1.01);
+}
+
+.note-section p {
+  font-size: 1rem;
+}
+
+.note-section strong {
+  color: #000;
+}
+
+/* Button */
+button,
+#markComplete {
+  display: block;
+  margin: 25px auto;
+  padding: 12px 22px;
+  font-size: 1rem;
+  background: linear-gradient(135deg, #2a7bcc, #1c5fa3);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+button:hover,
+#markComplete:hover {
+  background: linear-gradient(135deg, #1c5fa3, #2a7bcc);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+}
+
+
+.cmp-table-section {
+    max-width: 900px;
+    margin: 1.5rem auto;
+    padding: 0 1rem;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    color: #0f172a;
+}
+
+.cmp-table-section h2 {
+    font-size: 1.25rem;
+    margin-bottom: .75rem;
+    text-align: center;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(15,23,42,0.06);
+    background: #ffffff;
+}
+
+.cmp-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+.cmp-table thead th {
+    background: linear-gradient(90deg,#0ea5a0,#7dd3fc);
+    color: #021124;
+    text-align: center;
+    padding: 12px 14px;
+    font-weight: 700;
+    font-size: .95rem;
+}
+
+.cmp-table td {
+    padding: 12px 14px;
+    vertical-align: top;
+    font-size: .92rem;
+    line-height: 1.4;
+}
+
+.cmp-table tbody tr:nth-child(odd) td {
+    background: #ffffff;
+}
+
+.cmp-table tbody tr:nth-child(even) td {
+    background: #f9fbfd;
+}
+
+.cmp-table ul {
+    margin: 0.3rem 0 0;
+    padding-left: 1.1rem;
+}
+
+.sr-only {
+    position: absolute !important;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0);
+    white-space: nowrap; border: 0;
+}
+
+@media (max-width: 420px) {
+    .cmp-table-section h2 { font-size: 1.1rem; }
+    .cmp-table td, .cmp-table th { font-size: .95rem; padding: 10px 12px; }
+}
+.dos-donts {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: stretch; /* Makes both columns same height */
+    flex-wrap: wrap;
+}
+
+/* Shared card styles */
+.dos, .donts {
+    flex: 1;
+    min-width: 300px;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    font-family: Arial, sans-serif;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Hover effect for cards */
+.dos:hover, .donts:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
+
+/* Do's style */
+.dos {
+    background-color: #e8f9ee;
+    border-left: 6px solid #28a745;
+}
+.dos h3 {
+    color: #218838;
+    margin-bottom: 15px;
+}
+
+/* Don'ts style */
+.donts {
+    background-color: #fdecea;
+    border-left: 6px solid #dc3545;
+}
+.donts h3 {
+    color: #c82333;
+    margin-bottom: 15px;
+}
+
+/* List styling */
+.dos ul, .donts ul {
+    list-style-type: none;
+    padding: 0;
+}
+.dos li, .donts li {
+    margin-bottom: 12px;
+    line-height: 1.4;
+    padding: 6px 8px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+/* Hover effect for list items */
+.dos li:hover {
+    background-color: rgba(40, 167, 69, 0.1);
+}
+.donts li:hover {
+    background-color: rgba(220, 53, 69, 0.1);
+}
+
+/* Add check/cross icons before each item */
+.dos li::before {
+    content: "✔ ";
+    color: #28a745;
+    font-weight: bold;
+}
+.donts li::before {
+    content: "✘ ";
+    color: #dc3545;
+    font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dos-donts {
+        flex-direction: column;
+    }
+}
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
+}
+header h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+    display: inline-block;
+}
+
+header h1::after {
+    content: "";
+    display: block;
+    width: 80%;
+    height: 4px;
+    margin: 8px auto 0;
+    background: linear-gradient(90deg, #4facfe, #00f2fe);
+    border-radius: 4px;
+}
+
+/* Subtitle */
+h3 {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 25px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Video container */
+.video-wrapper {
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+}
+
+.video-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 16px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 90%; /* take almost full width */
+    width: 1200px;  /* nice wide limit for big screens */
+}
+
+.video-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Responsive iframe with 16:9 aspect ratio */
+.video-card iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+    .video-card {
+        padding: 10px;
+    }
+}
+
+.mark-complete-btn {
+    background: linear-gradient(135deg, #1560a7, #1c74aa); /* Dark blue gradient */
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    min-width: 150px;
+    text-align: center;
+}
+
+/* Hover effect */
+.mark-complete-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Active / click effect */
+.mark-complete-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive font & padding */
+@media (max-width: 768px) {
+    .mark-complete-btn {
+        padding: 10px 20px;
+        font-size: 1rem;
+        min-width: 130px;
+    }
+}
+
+@media (max-width: 480px) {
+    .mark-complete-btn {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+        min-width: 110px;
+    }
+}
+
+/* Bio Section Card */
+#bio {
+  display: flex;
+  justify-content: center;
+  margin: 40px auto;
+  padding: 0 15px;
+}
+
+#bio-card {
+  max-width: 900px;
+  background: #fff9db; /* soft yellow */
+  border: 2px solid #ffe066;
+  border-radius: 15px;
+  padding: 20px 25px;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#bio-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Profile Image */
+#bio-image {
+  width: 25vw;              /* scales with window width */
+  max-width: 200px;         /* never grows larger than 200px */
+  min-width: 120px;         /* never shrinks below 120px */
+  aspect-ratio: 1 / 1.3;      /* keeps it square */
+  border-radius: 30%;
+  object-fit: cover;
+  border: 4px solid #ffd43b; /* yellow border */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+#bio-image:hover {
+  transform: scale(1.05);
+}
+/* Bio Content */
+#bio-content {
+  flex: 1;
+}
+
+#bio-content h2 {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+  color: #8a6d00; /* yellow-brown accent */
+}
+
+#bio-content p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  #bio-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 25px;
+  }
+
+  #bio-image {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+/* Container for modules */
+.dr-mod-grid {
+  display: flex;
+  flex-wrap: wrap;              /* allows wrapping on smaller screens */
+  justify-content: center;      /* centers the modules */
+  gap: 20px;                    /* space between modules */
+  margin: 30px auto;
+  max-width: 1000px;            /* prevents overly wide stretch */
+}
+
+/* Individual module card style */
+.dr-mod-grid a {
+  flex: 1 1 calc(30% - 20px);   /* responsive: about 3 per row */
+  min-width: 220px;             /* doesn’t shrink too small */
+  background-color: #f5f5f5;
+  padding: 15px 20px;
+  text-align: center;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  border: 1px solid black;
+}
+
+/* Hover effects for modern look */
+.dr-mod-grid a:hover {
+  background-color: #ffd43b;   /* yellow highlight */
+  color: #111;
+  transform: translateY(-5px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+}
+
+/* Downloads page resources section */
+#resources {
+  display: flex;
+  flex-wrap: wrap;              /* allows wrapping on smaller screens */
+  justify-content: center;
+  gap: 20px;                    /* space between cards */
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 0 15px;
+}
+
+/* Individual resource cards */
+.resource-item {
+  flex: 1 1 calc(30% - 20px);   /* 3 per row on large screens */
+  min-width: 250px;             /* prevents squishing */
+  background-color: #fffbe6;    /* light yellow background */
+  padding: 20px;
+  border: 2px solid #ffd43b;    /* yellow border */
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect */
+.resource-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+  background-color: #fff8cc; /* subtle highlight */
+}
+
+/* Headings inside resource cards */
+.resource-item h4 {
+  margin-bottom: 12px;
+  color: #333;
+}
+
+/* Download links */
+.resource-item a {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 10px 16px;
+  background-color: #ffd43b;
+  color: #111;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.resource-item a:hover {
+  background-color: #ffcc00;
+  color: #000;
+}
+
+/* Question styling */
+#question-placeholder {
+  font-size: 18px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+/* Quiz option buttons */
+.option {
+  display: block;
+  width: 100%;              /* all options equal width */
+  margin: 8px 0;
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #f5f5f5;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  text-align: left;         /* makes options look clean like MCQs */
+  color: #000 !important;   /* always black text */
+  font-size: 1rem;
+}
+
+.option:hover:enabled {
+  background: #e6e6e6;
+}
+
+/* Correct answer styling */
+.correct {
+  background-color: #d4edda !important;
+  border-color: #28a745 !important;
+  color: #000 !important;   /* force black text */
+}
+
+/* Wrong selected option styling */
+.wrong {
+  background-color: #f8d7da !important;
+  border-color: #dc3545 !important;
+  color: #000 !important;   /* force black text */
+}
+
+
+
+/* Next button */
+#next-btn {
+  display: inline-block;
+  padding: 12px 24px;
+  margin-top: 15px;
+  background: #2196f3;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+#next-btn:hover {
+  background: #1976d2;
+}
+
+/* About Section */
+#about {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    background-color: #f9f9f9; /* subtle background to differentiate */
+}
+
+#about-card {
+    max-width: 900px;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+#about-card h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+#about-card p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* Module Navigation Buttons */
+.modhomebtn,
+.modnextbtn {
+  display: inline-block;
+  padding: 10px 18px;
+  margin: 10px 0;
+  background-color: #007bff;   /* primary blue */
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 25px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover Effect */
+.modhomebtn:hover,
+.modnextbtn:hover {
+  background-color: #0056b3;   /* darker blue */
+  transform: translateY(-2px); /* subtle lift */
+}
+
+/* Optional: make focus keyboard accessible */
+.modhomebtn:focus,
+.modnextbtn:focus {
+  outline: 2px solid #333;
+  outline-offset: 3px;
+}
+
+/* Password Strength Tool */
+.password-strength-tool {
+  max-width: 400px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.password-strength-tool input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+}
+
+/* Meter Bar */
+.meter {
+  width: 100%;
+  height: 12px;
+  background: #e0e0e0;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.meter-fill {
+  height: 100%;
+  width: 0%;
+  background: red;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+/* Feedback */
+.sim-feedback {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.suggestions {
+  font-size: 0.9rem;
+  color: #444;
+}
