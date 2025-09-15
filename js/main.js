@@ -1,5 +1,6 @@
-// ----------------- QUIZ -----------------
 document.addEventListener("DOMContentLoaded", () => {
+  const STORAGE_KEY = "quizProgress";
+
   const quizData = [
     {
       text: "Riya wants to create a strong password for her email. Which of the following passwords is the strongest?",
@@ -53,15 +54,28 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   ];
 
-  let currentQ = 0;
-  let score = 0;
-
   const questionEl = document.getElementById("question-placeholder");
   const optionsEl = document.getElementById("options-placeholder");
   const explanationEl = document.getElementById("explanation");
   const nextBtn = document.getElementById("next-btn");
   const progressBar = document.getElementById("quiz-progress-bar");
   const progressText = document.getElementById("progress-percentage");
+  let saved = localStorage.getItem(STORAGE_KEY);
+  let currentQ = 0, score = 0, answers = Array(quizData.length).fill(null);
+  if (saved) {
+    try {
+      const data = JSON.parse(saved);
+      if (data.currentQ !== undefined) currentQ = data.currentQ;
+      if (data.score !== undefined) score = data.score;
+      if (Array.isArray(data.answers)) answers = data.answers;
+    } catch(e) {
+      console.warn("Error parsing saved quiz data:", e);
+    }
+  }
+
+  function saveProgress() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ currentQ, score, answers }));
+  }
 
   function loadQuestion(index) {
     const q = quizData[index];
@@ -74,12 +88,18 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.classList.add("option");
       btn.innerText = opt.text;
       btn.dataset.correct = opt.correct;
-      btn.addEventListener("click", () => selectAnswer(btn, q.explanation));
+
+      if (answers[index] !== null) {
+        btn.disabled = true;
+        if ((opt.correct && answers[index]) || (!opt.correct && !answers[index] && opt.correct)) btn.classList.add("correct");
+      }
+
+      btn.addEventListener("click", () => selectAnswer(btn, q.explanation, index));
       optionsEl.appendChild(btn);
     });
   }
 
-  function selectAnswer(selectedBtn, explanation) {
+  function selectAnswer(selectedBtn, explanation, index) {
     const allOptions = document.querySelectorAll(".option");
     allOptions.forEach(btn => {
       btn.disabled = true;
@@ -87,13 +107,18 @@ document.addEventListener("DOMContentLoaded", () => {
       if (btn === selectedBtn && btn.dataset.correct === "false") btn.classList.add("wrong");
     });
 
-    // Score update
-    if (selectedBtn.dataset.correct === "true") score++;
+    const correct = selectedBtn.dataset.correct === "true";
+    if (answers[index] === null && correct) score++;
+    answers[index] = correct;
+    saveProgress();
 
     explanationEl.innerHTML = `<p>${explanation}</p>`;
     explanationEl.style.display = "block";
 
-    // Update quiz progress
+    updateQuizProgress();
+  }
+
+  function updateQuizProgress() {
     const progressPercent = Math.round(((currentQ + 1) / quizData.length) * 100);
     if (progressBar) progressBar.value = progressPercent;
     if (progressText) progressText.textContent = `${progressPercent}% (${currentQ + 1}/${quizData.length})`;
@@ -103,6 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (currentQ < quizData.length - 1) {
       currentQ++;
       loadQuestion(currentQ);
+      saveProgress();
     } else {
       questionEl.innerHTML = `<h3>🎉 Quiz Complete! Your score: ${score}/${quizData.length}</h3>`;
       optionsEl.innerHTML = "";
@@ -110,14 +136,14 @@ document.addEventListener("DOMContentLoaded", () => {
       nextBtn.style.display = "none";
       if (progressBar) progressBar.value = 100;
       if (progressText) progressText.textContent = `100% (${quizData.length}/${quizData.length})`;
+
     }
   });
 
-  // Initial load
   loadQuestion(currentQ);
+  updateQuizProgress();
 });
 
-// ----------------- MODULE PROGRESS -----------------
 const allModules = [
   "cs_passwords","cs_phishing","cs_suslinks","cs_privacy","cs_cyberbullying","cs_antivirus","cs_multfactauth","cs_devlock","cs_catfishing",
   "dr_compare","dr_kindness","dr_privacy","dr_socialMedia","dr_footprint","dr_screenTime","dr_plagiarism","dr_gaming"
@@ -173,21 +199,19 @@ function setupModuleButton(moduleId) {
   btn.addEventListener("click", () => completeModule(moduleId, btn));
 }
 
-// Run progress bar update safely on home pages
 document.addEventListener("DOMContentLoaded", updateProgressBar);
 
-// QUIZ ACCESS CONTROL
 document.addEventListener("DOMContentLoaded", () => {
-    const completed = loadProgress(); // from your existing module progress
+    const completed = loadProgress(); 
     const totalModules = allModules.length;
     const completedPercent = (completed.length / totalModules) * 100;
-    const minPercent = 80; // Minimum modules completion required
+    const minPercent = 80;
 
     const quizContainer = document.getElementById("quiz-container");
     const quizMessage = document.getElementById("quiz-message");
 
     if (completedPercent < minPercent) {
-        // Block the quiz
+        
         if (quizContainer) quizContainer.style.display = "none";
         if (quizMessage) {
             quizMessage.innerHTML = `
@@ -198,7 +222,7 @@ document.addEventListener("DOMContentLoaded", () => {
             quizMessage.style.display = "block";
         }
     } else {
-        // Allow the quiz
+        
         if (quizContainer) quizContainer.style.display = "block";
         if (quizMessage) quizMessage.style.display = "none";
     }
