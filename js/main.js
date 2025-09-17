@@ -227,3 +227,54 @@ document.addEventListener("DOMContentLoaded", () => {
         if (quizMessage) quizMessage.style.display = "none";
     }
 });
+document.addEventListener("DOMContentLoaded", () => {
+const passwordInput = document.getElementById("passwordInput");
+const meterFill = document.getElementById("meter-fill");
+const simStrength = document.getElementById("sim-strength");
+const simSuggestions = document.getElementById("sim-suggestions");
+
+passwordInput.addEventListener("input", () => {
+  const pwd = passwordInput.value;
+  let strength = 0;
+  let suggestions = [];
+
+  if (pwd.length >= 8) strength++;
+  else suggestions.push("Use at least 8 characters");
+
+  if (/[a-z]/.test(pwd)) strength++;
+  else suggestions.push("Add lowercase letters");
+
+  if (/[A-Z]/.test(pwd)) strength++;
+  else suggestions.push("Add uppercase letters");
+
+  if (/[0-9]/.test(pwd)) strength++;
+  else suggestions.push("Include numbers");
+
+  if (/[^a-zA-Z0-9]/.test(pwd)) strength++;
+  else suggestions.push("Add special characters (!@#$...)");
+
+  // Update meter fill
+  const percent = (strength / 5) * 100;
+  meterFill.style.width = percent + "%";
+
+  // Change color based on strength
+  if (strength <= 2) {
+    meterFill.style.backgroundColor = "red";
+    simStrength.textContent = "Weak";
+  } else if (strength === 3) {
+    meterFill.style.backgroundColor = "yellow";
+    simStrength.textContent = "Medium";
+  } else if (strength >= 4) {
+    meterFill.style.backgroundColor = "green";
+    simStrength.textContent = strength === 4 ? "Strong" : "Very Strong";
+  } else {
+    meterFill.style.backgroundColor = "transparent";
+    simStrength.textContent = "—";
+  }
+
+  // Update suggestions
+  simSuggestions.innerHTML = suggestions.length 
+    ? "<ul><li>" + suggestions.join("</li><li>") + "</li></ul>" 
+    : "<p style='color:green;'>Looks good!</p>";
+});
+});
