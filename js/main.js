@@ -119,9 +119,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updateQuizProgress() {
-    const progressPercent = Math.round((currentQ / quizData.length) * 100);
-    if (progressBar) progressBar.value = progressPercent;
-    if (progressText) progressText.textContent = `${progressPercent}% (${currentQ}/${quizData.length})`;
+      const answeredCount = answers.filter(a => a !== null).length;
+      const progressPercent = Math.round((answeredCount / quizData.length) * 100);
+
+      if (progressBar) progressBar.value = progressPercent;
+      if (progressText) progressText.textContent = `${progressPercent}% (${answeredCount}/${quizData.length})`;
   }
 
   nextBtn.addEventListener("click", () => {
@@ -130,13 +132,12 @@ document.addEventListener("DOMContentLoaded", () => {
       loadQuestion(currentQ);
       saveProgress();
     } else {
-      questionEl.innerHTML = `<h3>🎉 Quiz Complete! Your score: ${score}/${quizData.length}</h3>`;
+      questionEl.innerHTML = `<h3>&#127881; Quiz Complete! Your score: ${score}/${quizData.length}</h3>`;
       optionsEl.innerHTML = "";
       explanationEl.style.display = "none";
       nextBtn.style.display = "none";
       if (progressBar) progressBar.value = 100;
       if (progressText) progressText.textContent = `100% (${quizData.length}/${quizData.length})`;
-
     }
   });
 
