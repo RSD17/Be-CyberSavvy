@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateQuizProgress() {
     const progressPercent = Math.round((currentQ / quizData.length) * 100);
     if (progressBar) progressBar.value = progressPercent;
-    if (progressText) progressText.textContent = `${progressPercent}% (${currentQ + 1}/${quizData.length})`;
+    if (progressText) progressText.textContent = `${progressPercent}% (${currentQ}/${quizData.length})`;
   }
 
   nextBtn.addEventListener("click", () => {
