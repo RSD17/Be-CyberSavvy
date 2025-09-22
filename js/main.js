@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const STORAGE_KEY = "quizProgress";
+  const QUIZ_STORAGE_KEY = "quizProgress";
 
   const quizData = [
     {
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const nextBtn = document.getElementById("next-btn");
   const progressBar = document.getElementById("quiz-progress-bar");
   const progressText = document.getElementById("progress-percentage");
-  let saved = localStorage.getItem(STORAGE_KEY);
+  let saved = localStorage.getItem(QUIZ_STORAGE_KEY);
   let currentQ = 0, score = 0, answers = Array(quizData.length).fill(null);
   if (saved) {
     try {
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function saveProgress() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ currentQ, score, answers }));
+    localStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify({ currentQ, score, answers }));
   }
 
   function loadQuestion(index) {
@@ -91,12 +91,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (answers[index] !== null) {
         btn.disabled = true;
-        if ((opt.correct && answers[index]) || (!opt.correct && !answers[index] && opt.correct)) btn.classList.add("correct");
+        if (opt.correct) btn.classList.add("correct");
       }
 
       btn.addEventListener("click", () => selectAnswer(btn, q.explanation, index));
       optionsEl.appendChild(btn);
     });
+    updateQuizProgress();
   }
 
   function selectAnswer(selectedBtn, explanation, index) {
@@ -131,6 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
       currentQ++;
       loadQuestion(currentQ);
       saveProgress();
+      updateQuizProgress();
     } else {
       questionEl.innerHTML = `<h3>&#127881; Quiz Complete! Your score: ${score}/${quizData.length}</h3>`;
       optionsEl.innerHTML = "";
@@ -150,15 +152,15 @@ const allModules = [
   "dr_compare","dr_kindness","dr_privacy","dr_socialMedia","dr_footprint","dr_screenTime","dr_plagiarism","dr_gaming"
 ];
 
-const STORAGE_KEY = "completedModules";
+const MODULE_STORAGE_KEY = "completedModules";
 
 function loadProgress() {
-  const saved = localStorage.getItem(STORAGE_KEY);
+  const saved = localStorage.getItem(MODULE_STORAGE_KEY);
   return saved ? JSON.parse(saved) : [];
 }
 
 function saveProgress(completed) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(completed));
+  localStorage.setItem(MODULE_STORAGE_KEY, JSON.stringify(completed));
 }
 
 function completeModule(moduleId, buttonEl) {
@@ -254,11 +256,9 @@ passwordInput.addEventListener("input", () => {
   if (/[^a-zA-Z0-9]/.test(pwd)) strength++;
   else suggestions.push("Add special characters (!@#$...)");
 
-  // Update meter fill
   const percent = (strength / 5) * 100;
   meterFill.style.width = percent + "%";
 
-  // Change color based on strength
   if (strength <= 2) {
     meterFill.style.backgroundColor = "red";
     simStrength.textContent = "Weak";
@@ -273,7 +273,6 @@ passwordInput.addEventListener("input", () => {
     simStrength.textContent = "—";
   }
 
-  // Update suggestions
   simSuggestions.innerHTML = suggestions.length 
     ? "<ul><li>" + suggestions.join("</li><li>") + "</li></ul>" 
     : "<p style='color:green;'>Looks good!</p>";
