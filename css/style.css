@@ -618,9 +618,9 @@ h3 {
 /* Downloads page resources section */
 #resources {
   display: flex;
-  flex-wrap: wrap;              /* allows wrapping on smaller screens */
+  flex-wrap: wrap;             
   justify-content: center;
-  gap: 20px;                    /* space between cards */
+  gap: 20px;                   
   max-width: 1000px;
   margin: 30px auto;
   padding: 0 15px;
@@ -628,11 +628,11 @@ h3 {
 
 /* Individual resource cards */
 .resource-item {
-  flex: 1 1 calc(30% - 20px);   /* 3 per row on large screens */
-  min-width: 250px;             /* prevents squishing */
-  background-color: #fffbe6;    /* light yellow background */
+  flex: 1 1 calc(30% - 20px);   
+  min-width: 250px;             
+  background-color: #fffbe6;   
   padding: 20px;
-  border: 2px solid #ffd43b;    /* yellow border */
+  border: 2px solid #ffd43b;   
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   text-align: center;
@@ -643,7 +643,7 @@ h3 {
 .resource-item:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 18px rgba(0,0,0,0.2);
-  background-color: #fff8cc; /* subtle highlight */
+  background-color: #fff8cc; 
 }
 
 /* Headings inside resource cards */
@@ -679,7 +679,7 @@ h3 {
 /* Quiz option buttons */
 .option {
   display: block;
-  width: 100%;              /* all options equal width */
+  width: 100%;            
   margin: 8px 0;
   padding: 12px 15px;
   border: 1px solid #ccc;
@@ -687,8 +687,8 @@ h3 {
   background: #f5f5f5;
   cursor: pointer;
   transition: background 0.3s ease;
-  text-align: left;         /* makes options look clean like MCQs */
-  color: #000 !important;   /* always black text */
+  text-align: left;         
+  color: #000 !important;  
   font-size: 1rem;
 }
 
@@ -700,14 +700,14 @@ h3 {
 .correct {
   background-color: #d4edda !important;
   border-color: #28a745 !important;
-  color: #000 !important;   /* force black text */
+  color: #000 !important;
 }
 
 /* Wrong selected option styling */
 .wrong {
   background-color: #f8d7da !important;
   border-color: #dc3545 !important;
-  color: #000 !important;   /* force black text */
+  color: #000 !important;
 }
 
 
@@ -737,7 +737,7 @@ h3 {
     justify-content: center;
     align-items: center;
     padding: 40px 20px;
-    background-color: #f9f9f9; /* subtle background to differentiate */
+    background-color: #f9f9f9; 
 }
 
 #about-card {
@@ -767,7 +767,7 @@ h3 {
   display: inline-block;
   padding: 10px 18px;
   margin: 10px 0;
-  background-color: #007bff;   /* primary blue */
+  background-color: #007bff;
   color: #fff;
   font-size: 1rem;
   font-weight: 500;
@@ -779,11 +779,10 @@ h3 {
 /* Hover Effect */
 .modhomebtn:hover,
 .modnextbtn:hover {
-  background-color: #0056b3;   /* darker blue */
-  transform: translateY(-2px); /* subtle lift */
+  background-color: #0056b3;
+  transform: translateY(-2px);
 }
 
-/* Optional: make focus keyboard accessible */
 .modhomebtn:focus,
 .modnextbtn:focus {
   outline: 2px solid #333;
